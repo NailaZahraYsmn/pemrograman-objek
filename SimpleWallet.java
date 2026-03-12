@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class SimpleWallet {
     private String name;
     private double balance;
@@ -21,6 +23,10 @@ public class SimpleWallet {
     public String getBalance() {
         return "IDR" + balance;
     }
+
+    public double getBalanceValue() {
+        return balance;
+    }
     
     public boolean deposit(double amount) {
         if(amount > 0) {
@@ -31,7 +37,7 @@ public class SimpleWallet {
     }
 
     public boolean withdraw(double amount) {
-        if(amount > 0 && amount <= balance) {
+        if(amount > 0) {
             balance -= amount;
             return true;
         }
@@ -47,27 +53,75 @@ public class SimpleWallet {
     } 
 
     public static void main(String[]args) {
-        SimpleWallet myWallet1 = new SimpleWallet("Naila", 50000);
-        SimpleWallet myWallet2 = new SimpleWallet("Jaehyun",    100000);
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Masukkan nama wallet: ");
+        String walletName = sc.nextLine();
 
-        System.out.println("Saldo awal Naila : " + myWallet1.getBalance());
-        System.out.println("Saldo awal Jaehyun : " + myWallet2.getBalance());
+        System.out.println("Masukkan saldo awal: ");
+        double initialDeposit = sc.nextDouble();
 
-        double jumlahTransfer = 20000;
+        SimpleWallet wallet = new SimpleWallet(walletName, initialDeposit);
+        SimpleWallet targetWallet = new SimpleWallet( "Saldoku", 0);
+        boolean continueMenu = true;
        
-        if(myWallet1.transfer(myWallet2, jumlahTransfer)) {
-            System.out.println("Transfer berhasil!");
-        } else {
-            System.out.println("Transfer gagal! Saldo tidak mencukupi.");
+        while (continueMenu) {
+            System.out.println("\nMenu:");
+            System.out.println("1. Cek Saldo");
+            System.out.println("2. Deposit");
+            System.out.println("3. Withdraw");
+            System.out.println("4. Transfer");
+            System.out.println("5. Exit");
+            System.out.print("Pilih menu: ");
+            int choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("Saldo Anda: " + wallet.getBalance());
+                    break;
+                case 2:
+                    System.out.print("Masukkan jumlah deposit: ");
+                    double depositAmount = sc.nextDouble();
+                    if (wallet.deposit(depositAmount)) {
+                        System.out.println("Deposit berhasil! Saldo baru: " + wallet.getBalance());
+                    } else {
+                        System.out.println("Deposit gagal! Jumlah harus lebih besar dari 0.");
+                    }
+                    break;
+                case 3:
+                    System.out.print("Masukkan jumlah withdraw: ");
+                    double withdrawAmount = sc.nextDouble();
+
+                    if (withdrawAmount > wallet.getBalanceValue()) {
+                        System.out.println("Withdraw gagal! Saldo tidak mencukupi.");
+                    } else if (wallet.withdraw(withdrawAmount)) {
+                        System.out.println("Withdraw berhasil! Saldo baru: " + wallet.getBalance());
+                    } else {
+                        System.out.println("Withdraw gagal! Jumlah harus lebih besar dari 0.");
+                    }
+                    break;
+                case 4:
+                    System.out.print("Masukkan jumlah transfer: ");
+                    double transferAmount = sc.nextDouble();
+                    if (transferAmount > wallet.getBalanceValue()) {
+                        System.out.println("Transfer gagal! Saldo tidak mencukupi.");
+                    } else if (wallet.transfer(targetWallet, transferAmount)) {
+                        System.out.println("Transfer berhasil! Saldo baru: " + wallet.getBalance());
+                        System.out.println("Saldo Target Wallet: " + targetWallet.getBalance());
+                    } else {
+                        System.out.println("Transfer gagal! Jumlah harus lebih besar dari 0.");
+                    }
+                    break;
+                case 5:
+                    continueMenu = false;
+                    System.out.println("Terima kasih telah menggunakan SimpleWallet. Sampai jumpa!");
+                    break;
+                default:
+                    System.out.println("Pilihan tidak valid. Silakan coba lagi.");
+                    break;
+            }
         }
+        sc.close();
 
-        System.out.println("Saldo Naila setelah transfer 20k: " + myWallet1.getBalance());
-
-        myWallet1.deposit(50000);
-        System.out.println("Saldo Naila setelah deposit 50k: " + myWallet1.getBalance());
-
-        System.out.println("Saldo akhir " + myWallet1.getName() + ": " + myWallet1.getBalance());
-        System.out.println("Saldo akhir " + myWallet2.getName() + ": " + myWallet2.getBalance());
     }
-
-} 
+}
+       
