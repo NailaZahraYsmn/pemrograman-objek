@@ -1,101 +1,89 @@
-public class dataPerusahaan { 
-    public static void main (String[] args) {
-        lowongan loker = new lowongan();
-        loker.namaPerusahaan = "Bobby Constrution";
-        loker.idPerusahaan = 1001;
-        loker.kontakPerusahaan = 223344;
-        loker.alamatPerusahaan = "Kab. Madiun";
-        loker.bidangUsaha = "Bangunan";
-        loker.idLowongan = 1000;
-        loker.namaLowongan = "Pendaftaran Karyawan Baru";
-        loker.kategoriPelamar = "SMA Sederajat";
-        loker.infoPerusahaan();
-        loker.infoLowongan();
-
-        dataKaryawan k = new dataKaryawan();
-        k.idPerusahaan = 1001;
-        k.idKaryawan = 1;
-        k.namaKaryawan = "Yuwa";
-        k.alamatKaryawan = "Dolopo";
-        k.kontakKaryawan = 445566;
-        k.infoKaryawan();
-
-        dataKaryawanPasif p = new dataKaryawanPasif();
-        p.idPerusahaan = 1001;
-        p.idKaryawan = 22;
-        p.namaKaryawan = "naila";
-        p.alamatKaryawan ="Dagangan";
-        p.kontakKaryawan = 445544;
-        p.alasan = "Cuti";
-        p.infoKaryawanPasif();
-    }
+interface Info {  //Interface Segregation Principle (ISP)
+    void tampilInfo();
 }
-
-class perusahaan {
-    String namaPerusahaan;
-    int idPerusahaan;
-    int kontakPerusahaan; 
-    String alamatPerusahaan;
-    String bidangUsaha;
+class Perusahaan{   //Single Responsibility Principle (SRP)
+    private String namaPerusahaan;
+    private int idPerusahaan;
+    private int kontakPerusahaan; 
+    private String alamatPerusahaan;
+    private String bidangUsaha;
     
-    public void infoPerusahaan() {
-        System.out.println("===============================");
-        System.out.println("BOBBY CONSTRUCTION SYSTEM");
-        System.out.println("===============================");
-        System.out.println("Nama Perusahaan     : " + namaPerusahaan);
-        System.out.println("ID                  : " + idPerusahaan);
-        System.out.println("Kontak              : " + kontakPerusahaan);
-        System.out.println("Alamat              : " + alamatPerusahaan);
-        System.out.println("Bidang Usaha        : " + bidangUsaha);
+    public Perusahaan(int id, String nama, String alamat, int kontak, String bidang) {
+        this.idPerusahaan = id;
+        this.namaPerusahaan = nama;
+        this.alamatPerusahaan = alamat;
+        this.kontakPerusahaan = kontak;
+        this.bidangUsaha = bidang;
+    }
+    public String getNamaPerusahaan() {
+        return namaPerusahaan;
+    }
+    public String getAlamatPerusahaan() {
+        return alamatPerusahaan;
+    }
+    public int getIdPerusahaan() {
+        return idPerusahaan;
     }
 }
 
-class lowongan extends perusahaan {
+class Lowongan extends Perusahaan {
     int idLowongan;
     String namaLowongan;
     String kategoriPelamar;
+
+    public Lowongan(int id, String nama, String alamat, int kontak, String bidang) {
+        super(id, nama, alamat, kontak, bidang);
+    }
 
     public void infoLowongan() {
         System.out.println("==================================");
         System.out.println("Lowongan Pekerjaan yang Tersedia");
         System.out.println("==================================");
-        System.out.println("ID Perusahaan       : " + idPerusahaan);
+        System.out.println("ID Perusahaan       : " + getIdPerusahaan());
         System.out.println("ID Lowongan         : " + idLowongan);
         System.out.println("Nama Lowongan       : " + namaLowongan);
         System.out.println("Kategori Pelamar    : " + kategoriPelamar);
-        System.out.println("Lokasi              : " + alamatPerusahaan);
+        System.out.println("Lokasi              : " + getAlamatPerusahaan());
     }
 }
 
-class dataKaryawan extends perusahaan {
+class DataKaryawan extends Perusahaan {
     int idKaryawan;
     String namaKaryawan;
     String alamatKaryawan;
     int kontakKaryawan;
 
+    public DataKaryawan(int id, String nama, String alamat, int kontak, String bidang) {
+        super(id, nama, alamat, kontak, bidang);
+    }
+
     public void infoKaryawan() {
         System.out.println("=============================");
         System.out.println("DATA KARYAWAN AKTIF");
         System.out.println("=============================");
-        System.out.println("ID Perusahaan       : " + idPerusahaan);
+        System.out.println("ID Perusahaan       : " + getIdPerusahaan());
         System.out.println("ID KARYAWAN         : " + idKaryawan);
         System.out.println("Nama                : " + namaKaryawan);
         System.out.println("Alamat              : " + alamatKaryawan);
         System.out.println("Kontak              : " + kontakKaryawan);
     }
 }
-class dataKaryawanPasif extends perusahaan {
+class dataKaryawanPasif extends Perusahaan {
     int idKaryawan;
     String namaKaryawan;
     String alamatKaryawan;
     int kontakKaryawan;
     String alasan;
 
+    public dataKaryawanPasif(int id, String nama, String alamat, int kontak, String bidang) {
+        super(id, nama, alamat, kontak, bidang);
+    }
+
     public void infoKaryawanPasif() {
         System.out.println("=============================");
         System.out.println("DATA KARYAWAN PASIF");
         System.out.println("=============================");
-        System.out.println("ID Perusahaan       : " + idPerusahaan);
+        System.out.println("ID Perusahaan       : " + getIdPerusahaan());
         System.out.println("ID KARYAWAN         : " + idKaryawan);
         System.out.println("Nama                : " + namaKaryawan);
         System.out.println("Alamat              : " + alamatKaryawan);
