@@ -1,28 +1,40 @@
 interface Info {  //Interface Segregation Principle (ISP)
     void tampilInfo();
 }
-class Perusahaan{   //Single Responsibility Principle (SRP)
+class Perusahaan implements Info{   //Single Responsibility Principle (SRP)
     private String namaPerusahaan;
     private int idPerusahaan;
     private int kontakPerusahaan; 
     private String alamatPerusahaan;
     private String bidangUsaha;
     
-    public Perusahaan(int id, String nama, String alamat, int kontak, String bidang) {
-        this.idPerusahaan = id;
-        this.namaPerusahaan = nama;
-        this.alamatPerusahaan = alamat;
-        this.kontakPerusahaan = kontak;
-        this.bidangUsaha = bidang;
-    }
-    public String getNamaPerusahaan() {
-        return namaPerusahaan;
+    public Perusahaan(int idPerusahaan, String namaPerusahaan, String alamatPerusahaan, int kontakPerusahaan, String bidangUsaha) {
+        this.idPerusahaan = idPerusahaan;
+        this.namaPerusahaan = namaPerusahaan;
+        this.alamatPerusahaan = alamatPerusahaan;
+        this.kontakPerusahaan = kontakPerusahaan;
+        this.bidangUsaha = bidangUsaha;
     }
     public String getAlamatPerusahaan() {
         return alamatPerusahaan;
     }
     public int getIdPerusahaan() {
         return idPerusahaan;
+    }
+    public void setKontakPerusahaan() {
+        return kontakPerusahaan;
+    }
+    public String getBidangUsaha() {
+        return bidangUsaha;
+    }
+    
+    @Override
+    public void tampilInfo() {
+        System.out.println("Nama Perusahaan: " + namaPerusahaan);
+        System.out.println("ID Perusahaan: " + idPerusahaan);
+        System.out.println("Alamat: " + alamatPerusahaan);
+        System.out.println("Kontak: " + kontakPerusahaan);
+        System.out.println("Bidang Usaha: " + bidangUsaha);
     }
 }
 
