@@ -1,27 +1,15 @@
 public class MainApp {
     public static void main (String[] args) {
-        Lowongan loker = new Lowongan(1001, "Bobby Constrution", "Kab. Madiun", 223344, "Bangunan");
-        loker.idLowongan = 1000;
-        loker.namaLowongan = "Pendaftaran Karyawan Baru";
-        loker.kategoriPelamar = "SMA Sederajat";
-        loker.infoLowongan();
+        Perusahaan ptBobby = new Perusahaan(1001, "Bobby Construction", "Kab. Madiun", 223344, "Bangunan");
+        ptBobby.tampilInfo();
+      
+        Lowongan loker = new Lowongan(ptBobby, 2001, "admin", "SMA Sederajat");
+        loker.tampilInfo();
 
-        DataKaryawan k = new DataKaryawan();
-        k.setIdPerusahaan(1001);
-        k.idKaryawan = 1;
-        k.namaKaryawan = "Yuwa";
-        k.alamatKaryawan = "Dolopo";
-        k.kontakKaryawan = 445566;
-        k.infoKaryawan();
+        DataKaryawan dataKaryawan = new DataKaryawan(1, "naila", "Dagangan", 445544, ptBobby);
+        dataKaryawan.tampilInfo();
 
-        DataKaryawanPasif p = new DataKaryawanPasif();
-        p.setIdPerusahaan(1001);
-        p.idKaryawan = 22;
-        p.namaKaryawan = "naila";
-        p.alamatKaryawan ="Dagangan";
-        p.kontakKaryawan = 445544;
-        p.alasan = "Cuti";
-        p.infoKaryawanPasif();
+        DataKaryawanPasif karyawanPasif = new DataKaryawanPasif(22, "naila", "Dagangan", 445544, "Cuti");
+        karyawanPasif.tampilInfo();
     }
 }
-    
