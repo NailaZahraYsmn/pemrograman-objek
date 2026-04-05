@@ -15,6 +15,7 @@ class Perusahaan implements Info{   //Single Responsibility Principle (SRP)
         this.kontakPerusahaan = kontakPerusahaan;
         this.bidangUsaha = bidangUsaha;
     }
+    
     public String getAlamatPerusahaan() {
         return alamatPerusahaan;
     }
@@ -54,6 +55,19 @@ class Lowongan implements Info{
         this.kategoriPelamar = kategoriPelamar;
     }
 
+    public Perusahaan getPerusahaan() {
+        return perusahaan; 
+    }
+    public int getIdLowongan() { 
+        return idLowongan;
+    }
+    public String getNamaLowongan() {
+        return namaLowongan; 
+    }
+    public String getKategoriPelamar() {
+        return kategoriPelamar;
+    }
+
     @Override
     public void tampilInfo() {
         System.out.println("=============================");
@@ -76,6 +90,16 @@ abstract class Orang { //superclass untuk data karyawan pasif dan aktif
         this.alamat = alamat;
         this.kontak = kontak;
     }
+
+    public String getNama() {
+        return nama;
+    }
+    public String getAlamat() {
+        return alamat;
+    }
+    public int getKontak() {
+        return kontak;
+    }
 }
 class DataKaryawan extends Orang implements Info {
     private int idKaryawan;
@@ -86,6 +110,14 @@ class DataKaryawan extends Orang implements Info {
         this.idKaryawan = id;
         this.perusahaan = perusahaan;
     }
+
+    public int getIdKaryawan() {
+        return idKaryawan;
+    }
+    public Perusahaan getPerusahaan() {
+        return perusahaan; 
+    }
+
     @Override
     public void tampilInfo() {
         System.out.println("=============================");
@@ -108,6 +140,13 @@ class DataKaryawanPasif extends Orang implements Info {
         this.alasan = alasan;
     }
 
+    public int getIdKaryawan() {
+        return idKaryawan;
+    }
+    public String getAlasan() {
+        return alasan;
+    }
+    
     @Override
     public void tampilInfo() {
         System.out.println("=============================");
