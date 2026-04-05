@@ -101,7 +101,6 @@ class DataKaryawan extends Orang implements Info {
 }
 class DataKaryawanPasif extends Orang implements Info {
     private int idKaryawan;
-    private Perusahaan perusahaan;
     private String alasan;
 
     public DataKaryawanPasif(int idKaryawan, String namaKaryawan, String alamatKaryawan, int kontakKaryawan, String alasan) {
@@ -115,7 +114,6 @@ class DataKaryawanPasif extends Orang implements Info {
         System.out.println("=============================");
         System.out.println("DATA KARYAWAN PASIF");
         System.out.println("=============================");
-        System.out.println("ID Perusahaan       : " + perusahaan.getIdPerusahaan());
         System.out.println("ID KARYAWAN         : " + idKaryawan);
         System.out.println("Nama                : " + nama);
         System.out.println("Alamat              : " + alamat);
