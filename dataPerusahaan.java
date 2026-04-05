@@ -63,7 +63,6 @@ class Lowongan implements Info{
         System.out.println("Nama Lowongan       : " + namaLowongan);
         System.out.println("Kategori Pelamar    : " + kategoriPelamar);
         System.out.println("Lokasi              : " + perusahaan.getAlamatPerusahaan());
-        perusahaan.tampilInfo();
     }
 }
 
