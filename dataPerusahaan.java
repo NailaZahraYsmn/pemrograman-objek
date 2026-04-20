@@ -1,7 +1,11 @@
 interface Info {  //Interface Segregation Principle (ISP)
     void tampilInfo();
 }
-class Perusahaan implements Info{   //Single Responsibility Principle (SRP)
+
+interface Exportable{
+    String exportData();
+}
+class Perusahaan implements Info, Exportable{   //Single Responsibility Principle (SRP)
     private String namaPerusahaan;
     private int idPerusahaan;
     private int kontakPerusahaan; 
@@ -27,6 +31,10 @@ class Perusahaan implements Info{   //Single Responsibility Principle (SRP)
     }
     public String getBidangUsaha() {
         return bidangUsaha;
+    }
+    @Override
+    public String exportData(){
+        return idPerusahaan + "," + namaPerusahaan + "," + alamatPerusahaan+ "," + bidangUsaha;
     }
     
     @Override
@@ -101,7 +109,7 @@ abstract class Orang { //superclass untuk data karyawan pasif dan aktif
         return kontak;
     }
 }
-class DataKaryawan extends Orang implements Info {
+class DataKaryawan extends Orang implements Info, Exportable {
     private int idKaryawan;
     private Perusahaan perusahaan;
 
@@ -116,6 +124,10 @@ class DataKaryawan extends Orang implements Info {
     }
     public Perusahaan getPerusahaan() {
         return perusahaan; 
+    }
+    @Override
+    public String exportData() {
+        return idKaryawan + "," + alamat+ "," + kontak;
     }
 
     @Override
@@ -158,4 +170,15 @@ class DataKaryawanPasif extends Orang implements Info {
         System.out.println("Kontak              : " + kontak);
         System.out.println("Alasan              : " + alasan);
     }
+
+}
+
+class InfoPrinter {
+    public static void cetakInfo(Info entity) {
+        entity.tampilInfo();
+    }
+    public static void eksporData(Exportable entity){
+        System.out.println("Export: " + entity.exportData());
+    }
+
 }
