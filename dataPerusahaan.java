@@ -174,9 +174,11 @@ class DataKaryawanPasif extends Orang implements Info {
 }
 
 class InfoPrinter {
+    // polymorphic -- menerima abstraksi Info
     public static void cetakInfo(Info entity) {
         entity.tampilInfo();
     }
+    //polymorphic -- menerima abstraksi Exportable
     public static void eksporData(Exportable entity){
         System.out.println("Export: " + entity.exportData());
     }
