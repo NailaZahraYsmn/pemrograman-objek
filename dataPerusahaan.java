@@ -50,7 +50,7 @@ class Perusahaan implements Info, Exportable{   //Single Responsibility Principl
     }
 }
 
-class Lowongan implements Info{
+class Lowongan implements Info, Exportable{
     private int idLowongan;
     private String namaLowongan;
     private String kategoriPelamar;
@@ -74,6 +74,10 @@ class Lowongan implements Info{
     }
     public String getKategoriPelamar() {
         return kategoriPelamar;
+    }
+    @Override
+    public String exportData() {
+        return idLowongan + "," + namaLowongan + "," + kategoriPelamar + "," + perusahaan.getAlamatPerusahaan();
     }
 
     @Override
@@ -127,7 +131,7 @@ class DataKaryawan extends Orang implements Info, Exportable {
     }
     @Override
     public String exportData() {
-        return idKaryawan + "," + alamat+ "," + kontak;
+        return idKaryawan + "," + nama + "," + alamat+ "," + kontak;
     }
 
     @Override
@@ -142,7 +146,7 @@ class DataKaryawan extends Orang implements Info, Exportable {
         System.out.println("Kontak              : " + kontak);
     }
 }
-class DataKaryawanPasif extends Orang implements Info {
+class DataKaryawanPasif extends Orang implements Info, Exportable {
     private int idKaryawan;
     private String alasan;
 
@@ -157,6 +161,10 @@ class DataKaryawanPasif extends Orang implements Info {
     }
     public String getAlasan() {
         return alasan;
+    }
+    @Override
+    public String exportData() {
+        return idKaryawan + "," + nama + "," + alamat + "," + kontak + "," + alasan;
     }
     
     @Override

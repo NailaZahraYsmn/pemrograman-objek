@@ -10,7 +10,7 @@ public class MainApp {
             InfoPrinter.cetakInfo(entity);
         }
 
-        Exportable[] exportableItems = {ptBobby, dataKaryawan};
+        Exportable[] exportableItems = {ptBobby, dataKaryawan, karyawanPasif};
         for (Exportable item : exportableItems) {
             InfoPrinter.eksporData(item);
         }
