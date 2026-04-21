@@ -1,40 +1,32 @@
 // superclass
-abstract class PembayaranGaji {
-    protected double jumlah;
-
-    public PembayaranGaji(double jumlah) {
-        this.jumlah = jumlah;
-    }
-
-    public abstract void prosesPembayaran();
+interface PembayaranGaji {
+    void prosesPembayaran(double jumlah);
 }
 
 // subclass transfer bank
-class TransferBank extends PembayaranGaji {
+class TransferBank implements PembayaranGaji {
     private String namaBank;
 
-    public TransferBank(double jumlah, String namaBank) {
-        super(jumlah);
+    public TransferBank(String namaBank) {
         this.namaBank = namaBank;
     }
 
     @Override
-    public void prosesPembayaran() {
+    public void prosesPembayaran(double jumlah) {
         System.out.println("Transfer ke Bank " + namaBank + " sebesar Rp " + jumlah);
     }
 }
 
 // subclass e-wallet 
-class EWallet extends PembayaranGaji {
+class EWallet implements PembayaranGaji {
     private String namaWallet;
 
-    public EWallet(double jumlah, String namaWallet) {
-        super(jumlah);
+    public EWallet(String namaWallet) {
         this.namaWallet = namaWallet;
     }
 
     @Override
-    public void prosesPembayaran() {
+    public void prosesPembayaran(double jumlah) {
         System.out.println("Bayar via E-Wallet " + namaWallet + " sebesar Rp " + jumlah);
     }
 }
