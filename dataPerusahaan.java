@@ -14,6 +14,19 @@ class Perusahaan implements Info, Exportable {
     private String bidangUsaha;
 
     public Perusahaan(int idPerusahaan, String namaPerusahaan, String alamatPerusahaan, String kontakPerusahaan, String bidangUsaha) {
+        // Validasi untuk memastikan data perusahaan tidak kosong
+        if (namaPerusahaan == null || namaPerusahaan.trim().isEmpty()) {
+            throw new IllegalArgumentException("Nama perusahaan tidak boleh kosong");
+        }
+
+        if (alamatPerusahaan == null || alamatPerusahaan.trim().isEmpty()) {
+            throw new IllegalArgumentException("Alamat perusahaan tidak boleh kosong");
+        }
+
+        if (kontakPerusahaan == null || kontakPerusahaan.trim().isEmpty()) {
+            throw new IllegalArgumentException("Kontak perusahaan tidak boleh kosong");
+        } 
+
         this.idPerusahaan = idPerusahaan;
         this.namaPerusahaan = namaPerusahaan;
         this.alamatPerusahaan = alamatPerusahaan;
@@ -157,12 +170,31 @@ class DataKaryawanPasif extends Orang implements Info, Exportable {
     }
 }
 
+//Exception handling menggunakan try-catch-finally
 class InfoPrinter {
     public static void cetakInfo(Info entity) {
-        entity.tampilInfo();
+        try {
+            if (entity == null) {
+                throw new NullPointerException("Data entity kosong");
+            }
+            entity.tampilInfo();
+        } catch (NullPointerException e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            System.out.println("Proses cetak info selesai.\n");
+        }
     }
 
     public static void eksporData(Exportable entity) {
-        System.out.println("Export: " + entity.exportData());
+        try {
+            if (entity == null) {
+                throw new NullPointerException("Data export kosong");
+            }
+            System.out.println("Export: " + entity.exportData());
+        } catch (NullPointerException e) {
+            System.out.println("Gagal export: " + e.getMessage());
+        } finally {
+            System.out.println("Proses export selesai.\n");
+        }
     }
 }

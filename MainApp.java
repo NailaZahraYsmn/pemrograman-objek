@@ -1,5 +1,13 @@
 public class MainApp {
     public static void main(String[] args) {
+        // validasi data menggunakan exception handling
+        try {
+            Perusahaan perusahaanError = 
+                new Perusahaan(1002, "", "Madiun", "223344", "Teknologi");
+        } catch (IllegalArgumentException e) { 
+            System.out.println("Validasi Error: " + e.getMessage());
+        }
+        
         Perusahaan ptBobby = new Perusahaan(1001, "Bobby Construction", "Kab. Madiun", "223344", "Bangunan");
         Lowongan loker = new Lowongan(ptBobby, 2001, "admin", "SMA Sederajat");
         DataKaryawan dataKaryawan = new DataKaryawan(1, "naila", "Dagangan", "445544", ptBobby);
