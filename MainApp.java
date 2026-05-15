@@ -3,10 +3,14 @@ public class MainApp {
         Perusahaan ptBobby = new Perusahaan(1001, "Bobby Construction", "Kab. Madiun", 223344, "Bangunan");
         Lowongan loker = new Lowongan(ptBobby, 2001, "admin", "SMA Sederajat");
         DataKaryawan dataKaryawan = new DataKaryawan(1, "naila", "Dagangan", 445544, ptBobby);
-        DataKaryawanPasif karyawanPasif = new DataKaryawanPasif(22, "naila", "Dagangan", 445544, "Cuti");
+
+        DataKaryawan karyawanNull = null; // objek null untuk DataKaryawan
+        InfoPrinter.cetakInfo(karyawanNull);
+        
+        DataKaryawanPasif karyawanPasif = new DataKaryawanPasif(22, "naila", "Dagangan",082196445544, "Cuti"); //kontak 12 digit
 
         System.out.println("\n===== DATA SISTEM =====");
-        Info[] semuaEntity = {ptBobby, loker, dataKaryawan, karyawanPasif};
+        Info[] semuaEntity = {ptBobby, loker, dataKaryawan, karyawanNull, karyawanPasif};
         for (Info entity : semuaEntity) {
             InfoPrinter.cetakInfo(entity);
         }
