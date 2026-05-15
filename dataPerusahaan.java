@@ -14,6 +14,19 @@ class Perusahaan implements Info, Exportable {
     private String bidangUsaha;
 
     public Perusahaan(int idPerusahaan, String namaPerusahaan, String alamatPerusahaan, String kontakPerusahaan, String bidangUsaha) {
+        // Validasi untuk memastikan data perusahaan tidak kosong
+        if (namaPerusahaan == null || namaPerusahaan.trim().isEmpty()) {
+            throw new IllegalArgumentException("Nama perusahaan tidak boleh kosong");
+        }
+
+        if (alamatPerusahaan == null || alamatPerusahaan.trim().isEmpty()) {
+            throw new IllegalArgumentException("Alamat perusahaan tidak boleh kosong");
+        }
+
+        if (kontakPerusahaan == null || kontakPerusahaan.trim().isEmpty()) {
+            throw new IllegalArgumentException("Kontak perusahaan tidak boleh kosong");
+        } 
+
         this.idPerusahaan = idPerusahaan;
         this.namaPerusahaan = namaPerusahaan;
         this.alamatPerusahaan = alamatPerusahaan;
@@ -155,9 +168,10 @@ class DataKaryawanPasif extends Orang implements Info, Exportable {
         System.out.println("Kontak              : " + kontak);
         System.out.println("Alasan              : " + alasan);
     }
-
+}
 
 //Exception handling menggunakan try-catch-finally
+class InfoPrinter {
     public static void cetakInfo(Info entity) {
         try {
             if (entity == null) {
