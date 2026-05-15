@@ -1,42 +1,36 @@
-interface Info {  //Interface Segregation Principle (ISP)
+interface Info {
     void tampilInfo();
 }
 
-interface Exportable{
+interface Exportable {
     String exportData();
 }
-class Perusahaan implements Info, Exportable{   //Single Responsibility Principle (SRP)
+
+class Perusahaan implements Info, Exportable {
     private String namaPerusahaan;
     private int idPerusahaan;
-    private int kontakPerusahaan; 
+    private String kontakPerusahaan;
     private String alamatPerusahaan;
     private String bidangUsaha;
-    
-    public Perusahaan(int idPerusahaan, String namaPerusahaan, String alamatPerusahaan, int kontakPerusahaan, String bidangUsaha) {
+
+    public Perusahaan(int idPerusahaan, String namaPerusahaan, String alamatPerusahaan, String kontakPerusahaan, String bidangUsaha) {
         this.idPerusahaan = idPerusahaan;
         this.namaPerusahaan = namaPerusahaan;
         this.alamatPerusahaan = alamatPerusahaan;
         this.kontakPerusahaan = kontakPerusahaan;
         this.bidangUsaha = bidangUsaha;
     }
-    
-    public String getAlamatPerusahaan() {
-        return alamatPerusahaan;
-    }
-    public int getIdPerusahaan() {
-        return idPerusahaan;
-    }
-    public void setKontakPerusahaan(int kontakBaru) {
-        this.kontakPerusahaan = kontakBaru;
-    }
-    public String getBidangUsaha() {
-        return bidangUsaha;
-    }
+
+    public String getAlamatPerusahaan() { return alamatPerusahaan; }
+    public int getIdPerusahaan() { return idPerusahaan; }
+    public void setKontakPerusahaan(String kontakBaru) { this.kontakPerusahaan = kontakBaru; }
+    public String getBidangUsaha() { return bidangUsaha; }
+
     @Override
-    public String exportData(){
-        return idPerusahaan + "," + namaPerusahaan + "," + alamatPerusahaan+ "," + bidangUsaha;
+    public String exportData() {
+        return idPerusahaan + "," + namaPerusahaan + "," + alamatPerusahaan + "," + bidangUsaha;
     }
-    
+
     @Override
     public void tampilInfo() {
         System.out.println("===============================");
@@ -50,7 +44,7 @@ class Perusahaan implements Info, Exportable{   //Single Responsibility Principl
     }
 }
 
-class Lowongan implements Info, Exportable{
+class Lowongan implements Info, Exportable {
     private int idLowongan;
     private String namaLowongan;
     private String kategoriPelamar;
@@ -63,18 +57,11 @@ class Lowongan implements Info, Exportable{
         this.kategoriPelamar = kategoriPelamar;
     }
 
-    public Perusahaan getPerusahaan() {
-        return perusahaan; 
-    }
-    public int getIdLowongan() { 
-        return idLowongan;
-    }
-    public String getNamaLowongan() {
-        return namaLowongan; 
-    }
-    public String getKategoriPelamar() {
-        return kategoriPelamar;
-    }
+    public Perusahaan getPerusahaan() { return perusahaan; }
+    public int getIdLowongan() { return idLowongan; }
+    public String getNamaLowongan() { return namaLowongan; }
+    public String getKategoriPelamar() { return kategoriPelamar; }
+
     @Override
     public String exportData() {
         return idLowongan + "," + namaLowongan + "," + kategoriPelamar + "," + perusahaan.getAlamatPerusahaan();
@@ -92,46 +79,38 @@ class Lowongan implements Info, Exportable{
     }
 }
 
-abstract class Orang { //superclass untuk data karyawan pasif dan aktif
+abstract class Orang {
     protected String nama;
     protected String alamat;
-    protected int kontak;
+    protected String kontak;
 
-    public Orang(String nama, String alamat, int kontak) {
+    public Orang(String nama, String alamat, String kontak) {
         this.nama = nama;
         this.alamat = alamat;
         this.kontak = kontak;
     }
 
-    public String getNama() {
-        return nama;
-    }
-    public String getAlamat() {
-        return alamat;
-    }
-    public int getKontak() {
-        return kontak;
-    }
+    public String getNama() { return nama; }
+    public String getAlamat() { return alamat; }
+    public String getKontak() { return kontak; }
 }
+
 class DataKaryawan extends Orang implements Info, Exportable {
     private int idKaryawan;
     private Perusahaan perusahaan;
 
-    public DataKaryawan(int id, String namaKaryawan, String alamatKaryawan, int kontakKaryawan, Perusahaan perusahaan ) {
+    public DataKaryawan(int id, String namaKaryawan, String alamatKaryawan, String kontakKaryawan, Perusahaan perusahaan) {
         super(namaKaryawan, alamatKaryawan, kontakKaryawan);
         this.idKaryawan = id;
         this.perusahaan = perusahaan;
     }
 
-    public int getIdKaryawan() {
-        return idKaryawan;
-    }
-    public Perusahaan getPerusahaan() {
-        return perusahaan; 
-    }
+    public int getIdKaryawan() { return idKaryawan; }
+    public Perusahaan getPerusahaan() { return perusahaan; }
+
     @Override
     public String exportData() {
-        return idKaryawan + "," + nama + "," + alamat+ "," + kontak;
+        return idKaryawan + "," + nama + "," + alamat + "," + kontak;
     }
 
     @Override
@@ -146,27 +125,25 @@ class DataKaryawan extends Orang implements Info, Exportable {
         System.out.println("Kontak              : " + kontak);
     }
 }
+
 class DataKaryawanPasif extends Orang implements Info, Exportable {
     private int idKaryawan;
     private String alasan;
 
-    public DataKaryawanPasif(int idKaryawan, String namaKaryawan, String alamatKaryawan, int kontakKaryawan, String alasan) {
+    public DataKaryawanPasif(int idKaryawan, String namaKaryawan, String alamatKaryawan, String kontakKaryawan, String alasan) {
         super(namaKaryawan, alamatKaryawan, kontakKaryawan);
         this.idKaryawan = idKaryawan;
         this.alasan = alasan;
     }
 
-    public int getIdKaryawan() {
-        return idKaryawan;
-    }
-    public String getAlasan() {
-        return alasan;
-    }
+    public int getIdKaryawan() { return idKaryawan; }
+    public String getAlasan() { return alasan; }
+
     @Override
     public String exportData() {
         return idKaryawan + "," + nama + "," + alamat + "," + kontak + "," + alasan;
     }
-    
+
     @Override
     public void tampilInfo() {
         System.out.println("=============================");
@@ -178,17 +155,14 @@ class DataKaryawanPasif extends Orang implements Info, Exportable {
         System.out.println("Kontak              : " + kontak);
         System.out.println("Alasan              : " + alasan);
     }
-
 }
 
 class InfoPrinter {
-    // polymorphic -- menerima abstraksi Info
     public static void cetakInfo(Info entity) {
         entity.tampilInfo();
     }
-    //polymorphic -- menerima abstraksi Exportable
-    public static void eksporData(Exportable entity){
+
+    public static void eksporData(Exportable entity) {
         System.out.println("Export: " + entity.exportData());
     }
-
 }

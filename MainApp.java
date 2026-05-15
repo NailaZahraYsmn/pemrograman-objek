@@ -1,13 +1,13 @@
 public class MainApp {
-    public static void main (String[] args) {
-        Perusahaan ptBobby = new Perusahaan(1001, "Bobby Construction", "Kab. Madiun", 223344, "Bangunan");
+    public static void main(String[] args) {
+        Perusahaan ptBobby = new Perusahaan(1001, "Bobby Construction", "Kab. Madiun", "223344", "Bangunan");
         Lowongan loker = new Lowongan(ptBobby, 2001, "admin", "SMA Sederajat");
-        DataKaryawan dataKaryawan = new DataKaryawan(1, "naila", "Dagangan", 445544, ptBobby);
+        DataKaryawan dataKaryawan = new DataKaryawan(1, "naila", "Dagangan", "445544", ptBobby);
 
-        DataKaryawan karyawanNull = null; // objek null untuk DataKaryawan
+        DataKaryawan karyawanNull = null;
         InfoPrinter.cetakInfo(karyawanNull);
-        
-        DataKaryawanPasif karyawanPasif = new DataKaryawanPasif(22, "naila", "Dagangan",082196445544, "Cuti"); //kontak 12 digit
+
+        DataKaryawanPasif karyawanPasif = new DataKaryawanPasif(22, "naila", "Dagangan", "082196445544", "Cuti");
 
         System.out.println("\n===== DATA SISTEM =====");
         Info[] semuaEntity = {ptBobby, loker, dataKaryawan, karyawanNull, karyawanPasif};
@@ -27,6 +27,5 @@ public class MainApp {
 
         pembayaran1.prosesPembayaran(5000000);
         pembayaran2.prosesPembayaran(250000);
-    
     }
 }
