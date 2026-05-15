@@ -155,14 +155,32 @@ class DataKaryawanPasif extends Orang implements Info, Exportable {
         System.out.println("Kontak              : " + kontak);
         System.out.println("Alasan              : " + alasan);
     }
-}
 
-class InfoPrinter {
+
+//Exception handling menggunakan try-catch-finally
     public static void cetakInfo(Info entity) {
-        entity.tampilInfo();
+        try {
+            if (entity == null) {
+                throw new NullPointerException("Data entity kosong");
+            }
+            entity.tampilInfo();
+        } catch (NullPointerException e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            System.out.println("Proses cetak info selesai.\n");
+        }
     }
 
     public static void eksporData(Exportable entity) {
-        System.out.println("Export: " + entity.exportData());
+        try {
+            if (entity == null) {
+                throw new NullPointerException("Data export kosong");
+            }
+            System.out.println("Export: " + entity.exportData());
+        } catch (NullPointerException e) {
+            System.out.println("Gagal export: " + e.getMessage());
+        } finally {
+            System.out.println("Proses export selesai.\n");
+        }
     }
 }
